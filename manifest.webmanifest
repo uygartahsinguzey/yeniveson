@@ -1,0 +1,11 @@
+{
+  "name": "Berna – Günlük Odak ve Planlayıcı",
+  "short_name": "Berna",
+  "description": "Görsel dosya bağımlılığı olmayan odak sayacı, tiklenebilir ajanda ve yapılacaklar uygulaması.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f1eb",
+  "theme_color": "#f4f1eb",
+  "lang": "tr"
+}
