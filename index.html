@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff7ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Berna">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<title>Berna · Miki Edition</title>
+<style>
+:root{
+  --cream:#fff9f2;--paper:#fffdf9;--paper2:#fff8f4;--pink:#f36c7c;--pink2:#ff8c98;
+  --brown:#3f2417;--muted:#8d786a;--line:#ead7ca;--yellow:#f5c24c;--green:#a9c98a;
+  --blue:#b9d9ef;--shadow:0 2px 0 rgba(132,80,50,.06);
+  font-family:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--cream)}
+body{margin:0;color:var(--brown);background:
+linear-gradient(rgba(255,255,255,.30),rgba(255,255,255,.30)),
+repeating-linear-gradient(0deg,rgba(150,100,70,.025) 0 1px,transparent 1px 4px),var(--cream)}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{width:min(100%,710px);margin:auto;padding-bottom:18px}
+.topbar{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line);background:#fffaf5;position:sticky;top:0;z-index:20}
+.brand h1{font-size:22px;margin:0;letter-spacing:-1px}.brand small{font-size:10px}.heart{color:#ff8895}
+.nav{display:flex;align-items:stretch;height:100%}
+.nav button{border:0;background:transparent;min-width:68px;color:var(--brown);padding:9px 8px 7px;font-weight:700;border-bottom:3px solid transparent}
+.nav button span{display:block;font-size:23px;line-height:1.1}.nav button small{font-size:10px}
+.nav button.active{color:var(--pink);border-bottom-color:var(--pink)}
+.coins{display:flex;align-items:center;gap:8px;padding:10px 13px;border:1px solid #eed5a0;border-radius:11px;background:#fff6df;font-weight:700}
+.page{display:none;padding:18px 18px 0}.page.active{display:block}
+.dashboard{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:start}
+.card{border:1px solid var(--line);border-radius:12px;background:rgba(255,253,249,.96);box-shadow:var(--shadow)}
+.pad{padding:16px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.section-head h2{font-size:17px;margin:0}.section-head p{margin:3px 0 0;color:var(--muted);font-size:10px}
+.soft-btn{border:1px solid #f3b5bd;background:#fff3f4;color:var(--pink);border-radius:9px;padding:8px 10px;font-weight:700}
+.goal{margin-top:16px;border:1px solid #f3d88f;border-radius:10px;background:#fff9df;padding:14px}
+.goal strong{font-size:12px}.goal p{font-size:11px;line-height:1.55;margin:10px 0 0}
+.todo-title{margin:18px 0 10px;font-size:13px;display:flex;align-items:center;justify-content:space-between}
+.todo-list{display:grid;gap:8px}
+.todo{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;border:1px solid var(--line);border-radius:9px;background:#fffaf6;padding:9px}
+.todo.done{opacity:.58}.todo.done .txt{text-decoration:line-through}
+.check{width:18px;height:18px;border:1px solid #cdb9ac;border-radius:4px;display:grid;place-items:center;background:white}
+.check input{display:none}.check span{color:transparent}.check input:checked+span{color:var(--pink)}
+.todo .txt{font-size:11px;font-weight:700}.todo .time{font-size:10px;color:#6f665f}
+.progress-row{display:flex;justify-content:space-between;font-size:10px;margin:26px 0 8px}
+.track{height:8px;border-radius:999px;background:#eee5dc;overflow:hidden}.bar{height:100%;width:0;background:var(--pink)}
+.side{display:grid;gap:16px}
+.timer-card{text-align:center;padding:16px;background:linear-gradient(#fffaf7,#fff2f2)}
+.timer-head{display:flex;justify-content:space-between;align-items:center}.timer-head h2{font-size:16px;margin:0}
+.timer{font-size:54px;line-height:1;margin:26px 0 16px;font-weight:900;letter-spacing:-4px;text-shadow:3px 3px 0 rgba(63,36,23,.07)}
+.start{border:0;border-radius:24px;background:linear-gradient(#ff7f8d,#ed6272);color:white;padding:13px 34px;font-size:16px;font-weight:700}
+.focus-label{font-size:11px;margin:18px 0}.reward{border:1px solid #f3b8bf;border-radius:9px;background:#fff6f5;padding:13px;font-size:10px;line-height:1.7}
+.miki-card{padding:14px;display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center}
+.miki-info h3{margin:0 0 5px;font-size:19px}.stage{color:var(--pink);font-weight:700}.xp-line{font-size:10px;margin:8px 0}.level{text-align:right;font-size:9px;margin-top:7px}
+.room-card{margin-top:16px;padding:0;overflow:hidden}
+.room-title{padding:13px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.room-title h2{font-size:15px;margin:0}
+.room{height:275px;background:#f5d4ab;border-bottom:1px solid var(--line)}
+.room svg{width:100%;height:100%;display:block;image-rendering:pixelated}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center;background:#fff8f4}.stat:nth-child(1){background:#fff0f2}.stat:nth-child(2){background:#fff9df}.stat:nth-child(3){background:#edf7e7}.stat:nth-child(4){background:#eef7ff}
+.stat b{display:block;font-size:11px;margin-bottom:8px}.stat strong{font-size:14px}
+.shop{margin-top:16px;padding:14px}
+.shop-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.shop-head h2{font-size:15px;margin:0}
+.shop-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.shop-item{border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center;background:#fffaf6;min-height:150px}
+.shop-item h3{font-size:11px;margin:0 0 8px}.shop-icon{font-size:34px;height:45px;display:grid;place-items:center}.shop-item small{display:block;color:var(--muted);font-size:9px;margin:6px 0}.buy{border:0;background:transparent;color:#9a6d21;font-weight:700;font-size:10px}
+.footer-note{margin:16px 18px 0;border:1px solid #f2d3d0;border-radius:10px;background:#fff3f2;padding:12px;text-align:center;font-size:10px;color:#b5535c}
+.center-page{max-width:520px;margin:auto}.form-row{display:grid;grid-template-columns:1fr auto;gap:8px}.form-row input{min-height:44px;border:1px solid var(--line);border-radius:9px;padding:0 12px;background:#fffaf6}
+.list-card{margin-top:14px}.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:12px}.day{aspect-ratio:1;border:0;border-radius:8px;background:#fff8f4}.day.today{background:var(--pink);color:#fff}
+@media(max-width:760px){.app{width:100%}.topbar{height:auto;min-height:76px;padding:8px 10px;flex-wrap:wrap}.nav{order:3;width:100%;overflow:auto}.nav button{min-width:62px}.dashboard{grid-template-columns:1fr}.shop-grid{grid-template-columns:repeat(2,1fr)}.page{padding:12px}.room{height:240px}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><h1>BERNA <span class="heart">♥</span></h1><small>v10</small></div>
+  <nav class="nav">
+    <button class="active" data-page="home"><span>⌂</span><small>Bugün</small></button>
+    <button data-page="focus"><span>🍅</span><small>Odak</small></button>
+    <button data-page="agenda"><span>🗓️</span><small>Ajanda</small></button>
+    <button data-page="miki"><span>🐱</span><small>Miki</small></button>
+    <button data-page="progress"><span>📊</span><small>İlerleme</small></button>
+  </nav>
+  <div class="coins">🪙 <span id="coinTop">0</span> <b>＋</b></div>
+</header>
+
+<section id="home" class="page active">
+<div class="dashboard">
+  <article class="card pad">
+    <div class="section-head"><div><h2>☀️ Bugün</h2><p id="todayDate"></p></div><button class="soft-btn" id="goMiki">🐱 Miki ile<br>Güne Başla</button></div>
+    <div class="goal"><strong>⭐ Günün Hedefi</strong><p>Kendine iyi bak, küçük adımlar<br>büyük değişimler yaratır. <span class="heart">♥</span></p></div>
+    <div class="todo-title"><b>Yapılacaklar</b><button class="soft-btn" id="quickAdd">＋ Ekle</button></div>
+    <div id="todoList" class="todo-list"></div>
+    <div class="progress-row"><span id="todoCount">0 / 0 tamamlandı</span><b id="todoPercent">0%</b></div>
+    <div class="track"><div id="todoBar" class="bar"></div></div>
+  </article>
+
+  <div class="side">
+    <article class="card timer-card">
+      <div class="timer-head"><h2>🍅 Pomodoro</h2><button id="settingsBtn" style="border:0;background:transparent;font-size:18px">⚙</button></div>
+      <div id="timer" class="timer">25:00</div>
+      <button id="startBtn" class="start">▶ Başlat</button>
+      <div class="focus-label">Odaklanma 🍅</div>
+      <div class="reward">Pomodoro tamamladığında:<br>⭐ +15 XP &nbsp;&nbsp;&nbsp; +10 🪙</div>
+    </article>
+    <article class="card miki-card">
+      <div id="miniCat"></div>
+      <div class="miki-info"><h3>Miki <span class="heart">♥</span></h3><div id="stageText" class="stage">Yavru</div><div class="xp-line">XP: <span id="xpText">0 / 50</span></div><div class="track"><div id="xpBar" class="bar"></div></div><div class="level">Seviye <span id="levelText">1</span></div></div>
+    </article>
+  </div>
+</div>
+
+<article class="card room-card">
+  <div class="room-title"><h2>🏠 Miki'nin Odası</h2><button class="soft-btn" id="goShop">🧺 Mağazaya Git</button></div>
+  <div id="room" class="room"></div>
+  <div class="stats">
+    <div class="stat"><b>💗 Seviye</b><strong>⭐ <span id="statLevel">1</span></strong></div>
+    <div class="stat"><b>◆ XP</b><strong>⭐ <span id="statXp">0 / 50</span></strong></div>
+    <div class="stat"><b>Coin</b><strong>🪙 <span id="statCoin">0</span></strong></div>
+    <div class="stat"><b>Pomodoro</b><strong>🍅 <span id="statPomo">0</span></strong></div>
+  </div>
+</article>
+
+<article id="shop" class="card shop">
+  <div class="shop-head"><h2>🧺 Oda Mağazası</h2><span>⭐ Odanı güzelleştir! ⭐</span></div>
+  <div id="shopGrid" class="shop-grid"></div>
+</article>
+<div class="footer-note">🐱 Pomodoro yap, XP ve coin kazan, Miki'yi büyüt, odasını güzelleştir! <span class="heart">♥</span></div>
+</section>
+
+<section id="focus" class="page center-page">
+  <article class="card timer-card"><div class="timer-head"><h2>🍅 Pomodoro</h2></div><div id="timer2" class="timer">25:00</div><button id="startBtn2" class="start">▶ Başlat</button><div class="reward" style="margin-top:18px">Her tamamlanan Pomodoro: ⭐ +15 XP ve 🪙 +10 coin</div></article>
+</section>
+
+<section id="agenda" class="page center-page">
+  <article class="card pad"><div class="section-head"><h2>🗓️ Ajanda</h2></div><div class="form-row" style="margin-top:14px"><input id="agendaInput" placeholder="Yeni görev"><button id="agendaAdd" class="soft-btn">Ekle</button></div><div id="agendaList" class="todo-list list-card"></div></article>
+</section>
+
+<section id="miki" class="page">
+  <article class="card room-card"><div class="room-title"><h2>🏠 Miki'nin Odası</h2></div><div id="room2" class="room"></div><div class="stats"><div class="stat"><b>Seviye</b><strong id="mLevel">1</strong></div><div class="stat"><b>XP</b><strong id="mXp">0</strong></div><div class="stat"><b>Coin</b><strong id="mCoin">0</strong></div><div class="stat"><b>Pomodoro</b><strong id="mPomo">0</strong></div></div></article>
+</section>
+
+<section id="progress" class="page center-page">
+  <article class="card pad"><div class="section-head"><h2>📊 İlerleme</h2></div><div class="stats" style="padding:14px 0 0"><div class="stat"><b>Toplam Pomodoro</b><strong id="pPomo">0</strong></div><div class="stat"><b>Toplam XP</b><strong id="pXp">0</strong></div><div class="stat"><b>Coin</b><strong id="pCoin">0</strong></div><div class="stat"><b>Miki</b><strong id="pStage">Yavru</strong></div></div></article>
+</section>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const KEY="bernaV10Exact";
+const ITEMS={
+ wall:{name:"Duvar Kağıdı",icon:"🧻",cost:[50,70,90]},
+ floor:{name:"Zemin",icon:"🪵",cost:[50,70,90]},
+ window:{name:"Pencere",icon:"🪟",cost:[60,80,100]},
+ bed:{name:"Yatak",icon:"🛋️",cost:[70,90,120]},
+ rug:{name:"Halı",icon:"🟠",cost:[40,60,80]},
+ plant:{name:"Bitki",icon:"🪴",cost:[30,50,70]},
+ shelf:{name:"Raf",icon:"🗄️",cost:[60,80,100]},
+ lamp:{name:"Lamba",icon:"💡",cost:[40,60,80]},
+ toy:{name:"Oyuncak",icon:"🧶",cost:[35,55,75]}
+};
+const STAGES=[{name:"Yavru",min:0,next:50},{name:"Meraklı",min:50,next:130},{name:"Oyuncu",min:130,next:250},{name:"Koca Miki",min:250,next:null}];
+function fresh(){return{coins:0,xp:0,pomo:0,todos:[
+{text:"Psikoloji makalesi oku 🧠",done:false},{text:"Staj raporu yaz 📖",done:false},{text:"Almanca kelime çalış ✏️",done:false},{text:"Spor yap 💪",done:false}
+],room:{wall:0,floor:0,window:0,bed:0,rug:0,plant:0,shelf:0,lamp:0,toy:0},timer:1500,running:false}}
+let state;try{state={...fresh(),...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch{state=fresh()}
+let interval=null,endAt=null;
+const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
+function stage(){let s=STAGES[0];for(const x of STAGES)if(state.xp>=x.min)s=x;return s}
+function level(){return STAGES.findIndex(x=>x.name===stage().name)+1}
+function catSvg(big=false){
+ const scale=big?1.15:1;return `<svg viewBox="0 0 120 105" width="100%" height="${big?170:110}" shape-rendering="crispEdges">
+ <ellipse cx="60" cy="94" rx="34" ry="7" fill="rgba(0,0,0,.14)"/>
+ <path d="M35 35 L42 15 L53 28 L67 28 L78 15 L85 35 Z" fill="#858a90" stroke="#3b3d42" stroke-width="5"/>
+ <rect x="34" y="34" width="52" height="44" rx="18" fill="#9da2a8" stroke="#3b3d42" stroke-width="5"/>
+ <ellipse cx="60" cy="75" rx="26" ry="22" fill="#969ba1" stroke="#3b3d42" stroke-width="5"/>
+ <ellipse cx="60" cy="78" rx="15" ry="16" fill="#d9dcdf"/>
+ <circle cx="48" cy="50" r="5" fill="#202126"/><circle cx="73" cy="50" r="5" fill="#202126"/>
+ <rect x="57" y="57" width="7" height="5" fill="#f6a7b5"/><rect x="59" y="62" width="3" height="5" fill="#3b3d42"/>
+ <rect x="42" y="87" width="10" height="15" fill="#858a90" stroke="#3b3d42" stroke-width="4"/><rect x="69" y="87" width="10" height="15" fill="#858a90" stroke="#3b3d42" stroke-width="4"/>
+ <path d="M34 74 Q14 68 20 91" fill="none" stroke="#3b3d42" stroke-width="8" stroke-linecap="round"/><path d="M34 74 Q14 68 20 91" fill="none" stroke="#858a90" stroke-width="4" stroke-linecap="round"/>
+ </svg>`}
+function roomSvg(){
+ const r=state.room,wall=["#f3d6b2","#f7c8c8","#dceeff","#eadcf5"][r.wall],floor=["#c9894e","#b97845","#9d6f48","#6f6257"][r.floor];
+ let s=`<svg viewBox="0 0 680 330" preserveAspectRatio="none" shape-rendering="crispEdges"><rect width="680" height="220" fill="${wall}"/><rect y="220" width="680" height="110" fill="${floor}"/>`;
+ for(let x=0;x<680;x+=30)s+=`<rect x="${x}" y="220" width="2" height="110" fill="rgba(80,40,20,.14)"/>`;
+ s+=`<rect x="72" y="42" width="160" height="140" fill="#8b5d3e"/><rect x="82" y="52" width="140" height="120" fill="#a9dcf2"/><rect x="150" y="52" width="7" height="120" fill="#8b5d3e"/><rect x="82" y="108" width="140" height="7" fill="#8b5d3e"/><rect x="60" y="35" width="25" height="160" fill="#e58f9b"/><rect x="220" y="35" width="25" height="160" fill="#e58f9b"/>`;
+ if(r.window>0)s+=`<rect x="95" y="145" width="110" height="27" fill="#78b86d"/><circle cx="110" cy="74" r="12" fill="#fff6c8"/>`;
+ if(r.lamp>0)s+=`<rect x="340" y="0" width="6" height="56" fill="#6f513c"/><circle cx="343" cy="76" r="24" fill="#ffd56b"/><circle cx="343" cy="76" r="34" fill="rgba(255,213,107,.25)"/>`;
+ if(r.shelf>0)s+=`<rect x="430" y="70" width="120" height="14" fill="#91613d"/><rect x="445" y="42" width="35" height="28" fill="#739e55"/><rect x="492" y="44" width="35" height="26" fill="#d8a78a"/>`;
+ if(r.plant>0)s+=`<rect x="40" y="235" width="45" height="48" fill="#9a633b"/><circle cx="62" cy="215" r="35" fill="#4d9b48"/><circle cx="38" cy="225" r="25" fill="#68b75e"/>`;
+ if(r.bed>0)s+=`<ellipse cx="475" cy="260" rx="88" ry="45" fill="#e78992" stroke="#a85b62" stroke-width="8"/><ellipse cx="475" cy="250" rx="60" ry="28" fill="#f3a5aa"/>`;
+ if(r.rug>0)s+=`<ellipse cx="320" cy="290" rx="95" ry="34" fill="#ef9aaa" stroke="#c86b7c" stroke-width="6"/>`;
+ if(r.shelf>1)s+=`<rect x="555" y="165" width="100" height="105" fill="#986541"/><rect x="568" y="180" width="76" height="50" fill="#6b4a35"/>`;
+ s+=`<g transform="translate(255 170) scale(1.15)">${catSvg(true).replace(/<svg[^>]*>|<\/svg>/g,"")}</g></svg>`;
+ return s}
+function render(){
+ $("#todayDate").textContent=new Date().toLocaleDateString("tr-TR",{day:"numeric",month:"long",year:"numeric",weekday:"long"});
+ $("#coinTop").textContent=$("#statCoin").textContent=$("#mCoin").textContent=$("#pCoin").textContent=state.coins;
+ $("#statPomo").textContent=$("#mPomo").textContent=$("#pPomo").textContent=state.pomo;
+ $("#miniCat").innerHTML=catSvg();
+ const st=stage(),lvl=level();$("#stageText").textContent=$("#pStage").textContent=st.name;$("#levelText").textContent=$("#statLevel").textContent=$("#mLevel").textContent=lvl;
+ const max=st.next||state.xp;$("#xpText").textContent=$("#statXp").textContent=`${state.xp} / ${max}`;$("#mXp").textContent=$("#pXp").textContent=state.xp;
+ const pct=st.next?Math.round((state.xp-st.min)/(st.next-st.min)*100):100;$("#xpBar").style.width=pct+"%";
+ $("#room").innerHTML=$("#room2").innerHTML=roomSvg();
+ $("#todoList").innerHTML=state.todos.map((t,i)=>`<div class="todo ${t.done?"done":""}"><label class="check"><input data-i="${i}" type="checkbox" ${t.done?"checked":""}><span>✓</span></label><div class="txt">${t.text}</div><div class="time">🍅 25dk</div></div>`).join("");
+ const done=state.todos.filter(x=>x.done).length,p=state.todos.length?Math.round(done/state.todos.length*100):0;$("#todoCount").textContent=`${done} / ${state.todos.length} tamamlandı`;$("#todoPercent").textContent=p+"%";$("#todoBar").style.width=p+"%";
+ $("#shopGrid").innerHTML=Object.entries(ITEMS).map(([k,v])=>{const l=state.room[k],maxed=l>=3,c=maxed?0:v.cost[l];return `<div class="shop-item"><h3>${v.name}</h3><div class="shop-icon">${v.icon}</div><small>Seviye ${l+1}</small><button class="buy" data-buy="${k}" ${maxed||state.coins<c?"disabled":""}>${maxed?"Maksimum":`🪙 ${c}`}</button></div>`}).join("");
+ renderTimer()
+}
+function renderTimer(){const m=Math.floor(state.timer/60),s=state.timer%60;const txt=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;$("#timer").textContent=$("#timer2").textContent=txt;$("#startBtn").textContent=$("#startBtn2").textContent=state.running?"⏸ Duraklat":"▶ Başlat"}
+function startStop(){if(state.running){state.running=false;clearInterval(interval);interval=null;save();renderTimer();return}state.running=true;endAt=Date.now()+state.timer*1000;interval=setInterval(()=>{state.timer=Math.max(0,Math.ceil((endAt-Date.now())/1000));if(state.timer===0){clearInterval(interval);interval=null;state.running=false;state.timer=1500;state.pomo++;state.xp+=15;state.coins+=10;save();render();alert("Pomodoro tamamlandı! +15 XP ve +10 coin");}else renderTimer()},250);save();renderTimer()}
+$$(".nav button").forEach(b=>b.onclick=()=>{$$(".nav button").forEach(x=>x.classList.toggle("active",x===b));$$(".page").forEach(p=>p.classList.toggle("active",p.id===b.dataset.page));window.scrollTo({top:0,behavior:"smooth"})});
+$("#startBtn").onclick=$("#startBtn2").onclick=startStop;
+$("#todoList").onchange=e=>{if(e.target.matches("input[data-i]")){state.todos[+e.target.dataset.i].done=e.target.checked;save();render()}};
+$("#quickAdd").onclick=()=>{const t=prompt("Yeni yapılacak:");if(t){state.todos.push({text:t,done:false});save();render()}};
+$("#agendaAdd").onclick=()=>{const v=$("#agendaInput").value.trim();if(v){state.todos.push({text:v,done:false});$("#agendaInput").value="";save();render();renderAgenda()}};
+function renderAgenda(){$("#agendaList").innerHTML=state.todos.map((t,i)=>`<div class="todo ${t.done?"done":""}"><label class="check"><input data-ai="${i}" type="checkbox" ${t.done?"checked":""}><span>✓</span></label><div class="txt">${t.text}</div><button data-del="${i}" style="border:0;background:transparent;color:#b55">×</button></div>`).join("")}
+$("#agendaList").onchange=e=>{if(e.target.matches("input[data-ai]")){state.todos[+e.target.dataset.ai].done=e.target.checked;save();render();renderAgenda()}};
+$("#agendaList").onclick=e=>{if(e.target.dataset.del!==undefined){state.todos.splice(+e.target.dataset.del,1);save();render();renderAgenda()}};
+$("#shopGrid").onclick=e=>{const b=e.target.closest("[data-buy]");if(!b)return;const k=b.dataset.buy,l=state.room[k],c=ITEMS[k].cost[l];if(state.coins<c)return;state.coins-=c;state.room[k]++;save();render()};
+$("#goMiki").onclick=()=>document.querySelector('[data-page="miki"]').click();
+$("#goShop").onclick=()=>document.querySelector("#shop").scrollIntoView({behavior:"smooth"});
+$("#settingsBtn").onclick=()=>{const n=prompt("Pomodoro süresi (dakika):",25);if(n){state.timer=Math.max(1,+n)*60;state.running=false;clearInterval(interval);save();render()}};
+render();renderAgenda();
+</script>
+</body>
+</html>
