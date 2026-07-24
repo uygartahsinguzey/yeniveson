@@ -8,7 +8,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Berna">
-<title>Berna · Miki Edition V7.1</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+<title>Berna · Miki Edition V9</title>
 <style>
 :root{
   --bg:#f7f3ee;
@@ -249,16 +251,378 @@ dialog::backdrop{background:rgba(18,18,16,.55);backdrop-filter:blur(5px)}
   .theme-options{grid-template-columns:repeat(2,1fr)}
 }
 
+
+/* V8 pastel pixel arayüz */
+:root{
+  --accent:#f56f7d;
+  --accent-strong:#df5b69;
+  --coin:#f5bd43;
+}
+body{
+  background:
+    linear-gradient(rgba(255,255,255,.45),rgba(255,255,255,.45)),
+    radial-gradient(circle at 15% 0%,#fff0e7,transparent 35rem),
+    radial-gradient(circle at 85% 10%,#ffe8ee,transparent 32rem),
+    var(--bg);
+}
+.topbar{
+  padding:14px 18px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(255,253,249,.9);
+  box-shadow:var(--shadow);
+}
+.topbar h1{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase}
+.bottom-nav{
+  grid-template-columns:repeat(6,1fr);
+  top:12px;
+  bottom:auto;
+  position:sticky;
+  margin-bottom:14px;
+}
+.nav-button span{font-size:20px}
+.nav-button.active{
+  background:transparent;
+  color:var(--accent);
+  box-shadow:inset 0 -3px 0 var(--accent);
+  border-radius:12px;
+}
+.install-button{
+  min-height:40px;
+  border:1px solid #f2c78c;
+  border-radius:13px;
+  background:#fff6e5;
+  color:#8c5e27;
+  padding:0 13px;
+  font-size:11px;
+  font-weight:850;
+}
+.hero-card,.timer-card,.section-card,.room-scene-card,.calendar-card{
+  border-color:#ecd8ce;
+}
+.primary-button{
+  background:linear-gradient(180deg,#ff7e8c,#f06171);
+  box-shadow:0 8px 18px rgba(240,97,113,.22);
+}
+.primary-button:hover{background:linear-gradient(180deg,#f86e7d,#dc5364)}
+.metric-card:nth-child(1){background:#fff1f3}
+.metric-card:nth-child(2){background:#fff8e8}
+.metric-card:nth-child(3){background:#edf7e7}
+.room-scene-card{background:linear-gradient(180deg,#fffdf8,#fff5ef)}
+.shop-card{background:#fffaf6}
+.currency-chip{background:#fff7e4;border-color:#f1d69a}
+.friend-form{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:8px;
+  margin-top:16px;
+}
+.friends-hero{
+  display:grid;
+  grid-template-columns:1.3fr .8fr;
+  align-items:center;
+  gap:16px;
+}
+.friends-hero p:last-child{margin:8px 0 0;color:var(--muted);line-height:1.55}
+.friend-code-card{
+  display:grid;
+  gap:8px;
+  padding:15px;
+  border:1px solid #f0d5cf;
+  border-radius:17px;
+  background:#fff3f1;
+}
+.friend-code-card span{font-size:10px;color:var(--muted);font-weight:850;letter-spacing:.08em}
+.friend-code-card strong{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:18px;letter-spacing:.08em}
+.friend-note{margin:12px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+.friends-list{display:grid;gap:9px;margin-top:14px}
+.friend-card{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:11px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--panel-2);
+}
+.friend-avatar{
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:#ffe6ea;
+  font-size:22px;
+}
+.friend-copy strong,.friend-copy small{display:block}
+.friend-copy small{margin-top:4px;color:var(--muted)}
+.friend-status{
+  display:grid;
+  gap:5px;
+  text-align:right;
+}
+.friend-status span{font-size:10px;color:var(--muted)}
+.friend-status strong{font-size:12px}
+.friend-delete{
+  grid-column:1/-1;
+  justify-self:end;
+  border:0;
+  background:transparent;
+  color:var(--danger);
+  font-size:11px;
+  font-weight:800;
+}
+@media(max-width:700px){
+  .bottom-nav{
+    position:fixed;
+    top:auto;
+    bottom:max(12px,env(safe-area-inset-bottom));
+    margin-bottom:0;
+  }
+  .app-shell{padding-bottom:112px}
+  .install-button{display:none}
+  .friends-hero{grid-template-columns:1fr}
+  .friend-form{grid-template-columns:1fr}
+}
+@media(max-width:470px){
+  .bottom-nav{grid-template-columns:repeat(6,1fr)}
+  .nav-button small{font-size:8px}
+  .nav-button span{font-size:17px}
+}
+
+
+/* V9 — görseldeki pixel dashboard düzeni */
+:root{
+  --bg:#fff8f1;
+  --panel:#fffdf9;
+  --panel-2:#fff7f2;
+  --text:#3b2418;
+  --muted:#8a7468;
+  --line:#ecd9cb;
+  --accent:#f36d7c;
+  --accent-strong:#dd5969;
+  --accent-text:#fff;
+  --coin:#f3bd3f;
+  --shadow:0 8px 24px rgba(92,55,33,.07);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+}
+body{
+  background:
+    linear-gradient(rgba(255,255,255,.38),rgba(255,255,255,.38)),
+    repeating-linear-gradient(0deg,rgba(180,120,80,.025) 0 1px,transparent 1px 4px),
+    #fff8f1;
+}
+.app-shell{
+  width:min(100%,1180px);
+  padding-top:10px;
+}
+.topbar{
+  border-radius:0;
+  border-left:0;
+  border-right:0;
+  box-shadow:0 2px 0 rgba(243,109,124,.18);
+  background:#fffaf5;
+}
+.brand-wrap{display:flex;align-items:center;gap:10px}
+.brand-wrap h1{
+  text-transform:none;
+  letter-spacing:-.03em;
+  font-size:30px;
+}
+.edit-name-button{
+  width:38px;height:38px;border:1px solid #f4b8c0;border-radius:12px;
+  background:#fff2f4;color:var(--accent);font-size:18px;font-weight:900
+}
+.bottom-nav{
+  position:sticky;
+  top:0;
+  width:100%;
+  margin:0 0 14px;
+  border-radius:0;
+  border-left:0;border-right:0;
+  box-shadow:0 2px 0 rgba(243,109,124,.18);
+  background:#fffdf9;
+  z-index:30;
+}
+.nav-button{
+  min-height:68px;
+  gap:5px;
+}
+.nav-button span{font-size:24px}
+.nav-button small{font-size:11px;font-weight:900}
+.nav-button.active{
+  color:var(--accent);
+  box-shadow:inset 0 -3px 0 var(--accent);
+}
+.page.active{
+  animation:pageIn .18s ease;
+}
+@keyframes pageIn{from{opacity:.6;transform:translateY(3px)}to{opacity:1;transform:none}}
+.card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fffdf9;
+  box-shadow:none;
+}
+.hero-card,.timer-card,.section-card,.calendar-card,.room-scene-card{
+  padding:16px;
+}
+.hero-card{
+  background:linear-gradient(135deg,#fffdf9,#fff5f2);
+}
+.hero-copy h2{font-size:25px}
+.metric-card{
+  border-radius:12px;
+  padding:14px;
+}
+.metric-card:nth-child(1){background:#fff0f2}
+.metric-card:nth-child(2){background:#fff8dc}
+.metric-card:nth-child(3){background:#edf7e7}
+.primary-button{
+  border-radius:12px;
+  background:#f36d7c;
+  box-shadow:none;
+}
+.secondary-button{
+  border-radius:12px;
+}
+.timer-card{
+  background:linear-gradient(180deg,#fff9f7,#fff2f1);
+}
+.timer-display{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:clamp(72px,11vw,108px);
+  color:#3d2113;
+  text-shadow:3px 3px 0 rgba(61,33,19,.08);
+}
+.mode-row{background:#fff7f2}
+.mode-button.active{
+  background:#f36d7c;
+  color:#fff;
+}
+.reward-box{
+  border:1px solid #f6c5ca;
+  border-radius:12px;
+  padding:13px;
+  background:#fff6f5;
+}
+.room-scene{
+  border-radius:12px;
+  border:2px solid #b77b4e;
+  background:#f7d2aa;
+}
+.room-scene svg{display:block;image-rendering:pixelated}
+.shop-grid{
+  grid-template-columns:repeat(5,1fr);
+}
+.shop-card{
+  min-height:170px;
+  align-content:start;
+  text-align:center;
+  border-radius:12px;
+  background:#fffaf5;
+}
+.shop-card .shop-meta{flex-direction:column;justify-content:center}
+.shop-card button{width:100%;font-size:11px;padding:0 8px}
+.status-pill{
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.status-pill:nth-child(1){background:#fff0f2}
+.status-pill:nth-child(2){background:#fff8dc}
+.status-pill:nth-child(3){background:#edf7e7}
+.friend-code-card{
+  background:#fff3f3;
+  border-color:#f6c6cc;
+}
+.friend-card{
+  border-radius:12px;
+  background:#fffaf5;
+}
+.todo-item{
+  border-radius:10px;
+  background:#fffaf6;
+}
+.todo-meta span::before{content:"🍅 ";font-size:10px}
+.section-head h2,.calendar-head h2{font-size:18px}
+.eyebrow{font-size:9px}
+.install-button{
+  border-color:#f1d19d;
+  background:#fff7e7;
+}
+.name-field{
+  display:grid;
+  gap:8px;
+  margin:18px 0;
+}
+.name-field span{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+}
+@media(min-width:900px){
+  #todayPage{
+    display:grid;
+    grid-template-columns:1.2fr .9fr .9fr;
+    gap:12px;
+    align-items:start;
+  }
+  #todayPage .hero-card{grid-column:1/2;grid-row:1/2}
+  #todayPage .overview-grid{grid-column:2/4;grid-row:2/3;margin:0}
+  #todayPage .section-card:nth-of-type(2){grid-column:1/2;grid-row:2/5}
+  #todayPage .section-card:nth-of-type(3){grid-column:2/4;grid-row:1/2}
+  #focusPage{
+    max-width:760px;
+    margin:0 auto;
+  }
+  #roomPage{
+    display:grid;
+    grid-template-columns:1.25fr 1fr;
+    gap:12px;
+    align-items:start;
+  }
+  #roomPage .room-scene-card{margin:0}
+  #roomPage .section-card{margin:0}
+  #friendsPage{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    align-items:start;
+  }
+  #friendsPage .friends-hero{grid-column:1/2}
+  #friendsPage .section-card:nth-of-type(2){grid-column:2/3}
+  #friendsPage .section-card:nth-of-type(3){grid-column:1/3}
+}
+@media(max-width:950px){
+  .shop-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+  .bottom-nav{
+    position:fixed;
+    bottom:max(10px,env(safe-area-inset-bottom));
+    top:auto;
+    border-radius:20px;
+    width:min(calc(100% - 18px),700px);
+    left:50%;
+    transform:translateX(-50%);
+  }
+  .shop-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <div>
-        <p class="eyebrow">MİKİ EDITION · V7.1</p>
-        <h1>Berna</h1>
+      <div class="brand-wrap">
+        <div>
+          <p class="eyebrow">MİKİ EDITION · V9</p>
+          <h1 id="appName">Berna</h1>
+        </div>
+        <button id="editAppName" class="edit-name-button" type="button" aria-label="Uygulama adını değiştir">✎</button>
       </div>
-      <div class="topbar-actions"><span class="soft-pill" title="Yüklü sürüm">v7.1</span>
+      <div class="topbar-actions"><span class="soft-pill" title="Yüklü sürüm">v9</span><button id="installAppButton" class="install-button" type="button">＋ Masaüstüne ekle</button>
         <div class="currency-chip">🪙 <strong id="globalCoins">0</strong></div>
         <button id="openSettings" class="icon-button" type="button" aria-label="Ayarlar">⚙</button>
       </div>
@@ -269,7 +633,8 @@ dialog::backdrop{background:rgba(18,18,16,.55);backdrop-filter:blur(5px)}
       <button class="nav-button" data-page="focusPage" type="button"><span>◷</span><small>Odak</small></button>
       <button class="nav-button" data-page="agendaPage" type="button"><span>▦</span><small>Ajanda</small></button>
       <button class="nav-button" data-page="roomPage" type="button"><span>♢</span><small>Miki</small></button>
-      <button class="nav-button" data-page="progressPage" type="button"><span>↗</span><small>İlerleme</small></button>
+      <button class="nav-button" data-page="friendsPage" type="button"><span>♡</span><small>Arkadaşlarım</small></button>
+<button class="nav-button" data-page="progressPage" type="button"><span>↗</span><small>İlerleme</small></button>
     </nav>
 
     <main>
@@ -475,6 +840,48 @@ dialog::backdrop{background:rgba(18,18,16,.55);backdrop-filter:blur(5px)}
         </article>
       </section>
 
+
+      <section id="friendsPage" class="page">
+        <article class="card section-card friends-hero">
+          <div>
+            <p class="eyebrow">ARKADAŞLARIM</p>
+            <h2>Birlikte odaklanın</h2>
+            <p>Arkadaş kodunu paylaş, arkadaşlarını ekle ve ilerlemelerini yerel listende takip et.</p>
+          </div>
+          <div class="friend-code-card">
+            <span>Senin kodun</span>
+            <strong id="myFriendCode">BERNA-0000</strong>
+            <button id="copyFriendCode" class="secondary-button" type="button">Kodu kopyala</button>
+          </div>
+        </article>
+
+        <article class="card section-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">ARKADAŞ EKLE</p>
+              <h2>Kodla ekle</h2>
+            </div>
+            <span id="friendCount" class="soft-pill">0 arkadaş</span>
+          </div>
+          <form id="friendForm" class="friend-form">
+            <input id="friendNameInput" maxlength="28" placeholder="Arkadaşının adı">
+            <input id="friendCodeInput" maxlength="20" placeholder="Örn. BERNA-A7K2">
+            <button class="primary-button" type="submit">Arkadaş ekle</button>
+          </form>
+          <p class="friend-note">Bu sürümde arkadaşlar cihazında saklanır. Gerçek zamanlı ortak odak sistemi için daha sonra çevrimiçi hesap sistemi bağlanabilir.</p>
+        </article>
+
+        <article class="card section-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">LİSTE</p>
+              <h2>Eklediğin arkadaşlar</h2>
+            </div>
+          </div>
+          <div id="friendsList" class="friends-list"></div>
+        </article>
+      </section>
+
       <section id="progressPage" class="page">
         <article class="card section-card">
           <div class="section-head">
@@ -530,6 +937,24 @@ dialog::backdrop{background:rgba(18,18,16,.55);backdrop-filter:blur(5px)}
       </section>
     </main>
 
+
+    <dialog id="nameDialog">
+      <form method="dialog" class="settings-panel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">UYGULAMA ADI</p>
+            <h2>Başlığı değiştir</h2>
+          </div>
+          <button id="closeNameDialog" class="icon-button" type="button" aria-label="Kapat">×</button>
+        </div>
+        <label class="name-field">
+          <span>Sol üstte görünecek isim</span>
+          <input id="appNameInput" maxlength="18" placeholder="Örn. Berna">
+        </label>
+        <button id="saveAppName" class="primary-button full-width" type="button">Kaydet</button>
+      </form>
+    </dialog>
+
     <dialog id="settingsDialog">
       <form method="dialog" class="settings-panel">
         <div class="section-head">
@@ -564,27 +989,12 @@ dialog::backdrop{background:rgba(18,18,16,.55);backdrop-filter:blur(5px)}
   </div>
 <script>
 
-async function clearOldAppCache(){
-  try{
-    if("serviceWorker" in navigator){
-      const registrations=await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map(registration=>registration.unregister()));
-    }
-    if("caches" in window){
-      const keys=await caches.keys();
-      await Promise.all(keys.map(key=>caches.delete(key)));
-    }
-  }catch(error){
-    console.warn("Eski önbellek temizlenemedi",error);
-  }
-}
-clearOldAppCache();
 
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
 
 const STORAGE_KEY="bernaV7Miki";
-const VERSION="7.1.0";
+const VERSION="9.0.0";
 const DEFAULT_CATEGORIES=["Genel","Psikoloji","İngilizce","Python"];
 const THEMES=[
   {id:"paper",name:"Kâğıt",c1:"#f7f3ee",c2:"#8d9d79"},
@@ -640,6 +1050,7 @@ function emptyState(text){return `<div class="empty-state">${escapeHtml(text)}</
 function createDefaultState(){
   return {
     version:VERSION,
+    appName:"Berna",
     settings:{focus:25,short:5,long:15,dailyGoal:120,theme:"paper"},
     categories:[...DEFAULT_CATEGORIES],
     agenda:[],
@@ -647,7 +1058,7 @@ function createDefaultState(){
     sessions:[],
     stats:{totalMinutes:0,totalSessions:0,currentStreak:0,bestStreak:0,lastFocusDate:null},
     miki:{name:"Miki",xp:0,coins:0},
-    room:{wall:0,floor:0,window:0,bed:0,rug:0,plant:0,shelf:0,lamp:0,toy:0}
+    room:{wall:0,floor:0,window:0,bed:0,rug:0,plant:0,shelf:0,lamp:0,toy:0},friends:[],friendCode:""
   };
 }
 function loadState(){
@@ -657,10 +1068,13 @@ function loadState(){
     const fresh=createDefaultState();
     return {
       ...fresh,...parsed,
+      appName:typeof parsed.appName==="string"&&parsed.appName.trim()?parsed.appName:"Berna",
       settings:{...fresh.settings,...(parsed.settings||{})},
       stats:{...fresh.stats,...(parsed.stats||{})},
       miki:{...fresh.miki,...(parsed.miki||{})},
       room:{...fresh.room,...(parsed.room||{})},
+      friends:Array.isArray(parsed.friends)?parsed.friends:[],
+      friendCode:typeof parsed.friendCode==="string"?parsed.friendCode:"",
       categories:Array.isArray(parsed.categories)&&parsed.categories.length?parsed.categories:fresh.categories,
       agenda:Array.isArray(parsed.agenda)?parsed.agenda:[],
       history:parsed.history&&typeof parsed.history==="object"?parsed.history:{},
@@ -693,6 +1107,47 @@ function getStageProgress(){
   const total=next-currentMin;
   return {percent:Math.round(gained/total*100),label:`Sonraki evreye ${Math.max(0,next-state.miki.xp)} XP`,stage};
 }
+
+function makeFriendCode(){
+  const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code="BERNA-";
+  for(let i=0;i<4;i++)code+=alphabet[Math.floor(Math.random()*alphabet.length)];
+  return code;
+}
+function ensureFriendCode(){
+  if(!state.friendCode){
+    state.friendCode=makeFriendCode();
+    saveState();
+  }
+}
+function normalizeFriendCode(value){
+  return value.trim().toUpperCase().replace(/\s+/g,"");
+}
+function renderFriends(){
+  ensureFriendCode();
+  $("#myFriendCode").textContent=state.friendCode;
+  $("#friendCount").textContent=`${state.friends.length} arkadaş`;
+  $("#friendsList").innerHTML=state.friends.length?state.friends.map(friend=>`<article class="friend-card">
+    <div class="friend-avatar">🐱</div>
+    <div class="friend-copy">
+      <strong>${escapeHtml(friend.name)}</strong>
+      <small>${escapeHtml(friend.code)}</small>
+    </div>
+    <div class="friend-status">
+      <span>Durum</span>
+      <strong>${friend.status||"Odaklanmaya hazır"}</strong>
+    </div>
+    <button class="friend-delete" type="button" data-delete-friend="${friend.id}">Arkadaşı kaldır</button>
+  </article>`).join(""):emptyState("Henüz arkadaş eklemedin.");
+}
+
+
+function renderAppName(){
+  const name=(state.appName||"Berna").trim()||"Berna";
+  $("#appName").textContent=name;
+  document.title=`${name} · Miki Edition`;
+}
+
 function applyTheme(){
   document.body.dataset.theme=state.settings.theme==="paper"?"":state.settings.theme;
   const colors={paper:"#f7f3ee",night:"#131513",rose:"#f9f1f2",sky:"#eef4f8"};
@@ -718,6 +1173,7 @@ function switchPage(id){
   if(id==="todayPage")renderToday();
   if(id==="agendaPage")renderAgenda();
   if(id==="roomPage")renderRoom();
+  if(id==="friendsPage")renderFriends();
   if(id==="progressPage")renderProgress();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -1107,12 +1563,14 @@ function renderSettings(){
   </button>`).join("");
 }
 function renderAll(){
+  renderAppName();
   renderHeaderCoins();
   renderCategories();
   renderToday();
   renderDailyGoal();
   renderAgenda();
   renderRoom();
+  renderFriends();
   renderProgress();
 }
 
@@ -1132,7 +1590,18 @@ async function importData(file){
     if(!incoming||typeof incoming!=="object")throw new Error("invalid");
     state={...createDefaultState(),...incoming,settings:{...createDefaultState().settings,...(incoming.settings||{})},stats:{...createDefaultState().stats,...(incoming.stats||{})},miki:{...createDefaultState().miki,...(incoming.miki||{})},room:{...createDefaultState().room,...(incoming.room||{})}};
     saveState();
-    applyTheme();
+    
+async function registerPwa(){
+  if(!("serviceWorker" in navigator))return;
+  try{
+    const registration=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
+    await registration.update();
+  }catch(error){
+    console.warn("PWA kaydı başarısız",error);
+  }
+}
+
+applyTheme();
     timer.remaining=timerDuration();
     renderTimer();
     renderAll();
@@ -1223,6 +1692,86 @@ $("#shopGrid").addEventListener("click",event=>{
   buyRoomItem(button.dataset.buyItem);
 });
 
+
+let deferredInstallPrompt=null;
+window.addEventListener("beforeinstallprompt",event=>{
+  event.preventDefault();
+  deferredInstallPrompt=event;
+  $("#installAppButton").style.display="";
+});
+window.addEventListener("appinstalled",()=>{
+  deferredInstallPrompt=null;
+  $("#installAppButton").textContent="✓ Yüklendi";
+  $("#installAppButton").disabled=true;
+  toast("Berna masaüstüne eklendi");
+});
+$("#installAppButton").addEventListener("click",async()=>{
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    const choice=await deferredInstallPrompt.userChoice;
+    if(choice.outcome==="accepted")toast("Yükleme başlatıldı");
+    deferredInstallPrompt=null;
+  }else{
+    toast("Chrome menüsü → Yayınla, kaydet ve paylaş → Uygulamayı yükle");
+  }
+});
+
+$("#copyFriendCode").addEventListener("click",async()=>{
+  ensureFriendCode();
+  try{
+    await navigator.clipboard.writeText(state.friendCode);
+    toast("Arkadaş kodu kopyalandı");
+  }catch{
+    prompt("Arkadaş kodunu kopyala:",state.friendCode);
+  }
+});
+$("#friendForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const name=$("#friendNameInput").value.trim();
+  const code=normalizeFriendCode($("#friendCodeInput").value);
+  if(!name||!code)return toast("İsim ve arkadaş kodu gerekli");
+  if(code===state.friendCode)return toast("Kendi kodunu ekleyemezsin");
+  if(!/^BERNA-[A-Z0-9]{4,10}$/.test(code))return toast("Arkadaş kodu geçersiz");
+  if(state.friends.some(friend=>friend.code===code))return toast("Bu arkadaş zaten ekli");
+  state.friends.push({id:uid(),name,code,status:"Odaklanmaya hazır",addedAt:new Date().toISOString()});
+  saveState();
+  $("#friendNameInput").value="";
+  $("#friendCodeInput").value="";
+  renderFriends();
+  toast("Arkadaş eklendi");
+});
+$("#friendsList").addEventListener("click",event=>{
+  const button=event.target.closest("[data-delete-friend]");
+  if(!button)return;
+  state.friends=state.friends.filter(friend=>friend.id!==button.dataset.deleteFriend);
+  saveState();
+  renderFriends();
+  toast("Arkadaş kaldırıldı");
+});
+
+
+$("#editAppName").addEventListener("click",()=>{
+  $("#appNameInput").value=state.appName||"Berna";
+  $("#nameDialog").showModal();
+  setTimeout(()=>$("#appNameInput").focus(),50);
+});
+$("#closeNameDialog").addEventListener("click",()=>$("#nameDialog").close());
+$("#saveAppName").addEventListener("click",()=>{
+  const value=$("#appNameInput").value.trim();
+  if(!value)return toast("Bir isim yaz");
+  state.appName=value.slice(0,18);
+  saveState();
+  renderAppName();
+  $("#nameDialog").close();
+  toast("Uygulama adı değiştirildi");
+});
+$("#appNameInput").addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    event.preventDefault();
+    $("#saveAppName").click();
+  }
+});
+
 $("#openSettings").addEventListener("click",()=>{renderSettings(); $("#settingsDialog").showModal();});
 $("#closeSettings").addEventListener("click",()=>$("#settingsDialog").close());
 $("#themeOptions").addEventListener("click",event=>{
@@ -1268,6 +1817,8 @@ renderTimer();
 renderAll();
 
 
+
+addEventListener("load",registerPwa);
 </script>
 </body>
 </html>

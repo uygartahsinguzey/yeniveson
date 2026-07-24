@@ -1,15 +1,18 @@
-# Berna V7.1 · Tek Dosya Sürümü
+# Berna V9 Pixel Dashboard
 
-Bu sürüm dosya karışması ve eski CSS problemi yaşanmaması için hazırlanmıştır.
+Özellikler:
+- Referans görsele yakın pastel pixel dashboard
+- Düzenlenebilir sol üst uygulama adı
+- Pomodoro, XP, coin, Miki büyümesi
+- Pixel oda ve mağaza
+- Ajanda
+- Arkadaşlarım sekmesi
+- PWA / masaüstüne yükleme
 
-## Yüklenecek tek dosya
-
-- `index.html`
-
-CSS, JavaScript, Miki, XP, coin, pixel oda ve mağaza kodlarının tamamı bu dosyanın içindedir.
-
-## Güncelleme
-
-Repository içindeki eski dosyaların tamamını silin ve yalnızca bu `index.html` dosyasını yükleyin.
-
-Uygulama ilk açılışta önceki service worker ve tarayıcı önbelleklerini otomatik olarak temizler.
+Yüklenecek dosyalar:
+- index.html
+- manifest.webmanifest
+- sw.js
+- icon-192.png
+- icon-512.png
+- README.md
