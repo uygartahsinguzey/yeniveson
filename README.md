@@ -1,42 +1,46 @@
-# Berna V5.2 Lite
+# Berna V7 · Miki Edition
 
-Bu sürümde kırık görsel hatasına yol açabilecek tüm görsel bağımlılıkları kaldırıldı.
+Bu sürümde uygulamaya tatlı bir pixel kedi olan **Miki** ve geliştirilebilir bir **pixel oda** eklendi.
 
-## Kaldırılanlar
+## Yeni özellikler
 
-- Kedi görselleri ve kedi seçimi
-- Oda, mobilya ve mağaza sistemi
-- Mevsim, hava ve gün/gece görselleri
-- Mama, büyüme ve coin ekonomisi
-- Ayrı ikon ve `assets` klasörleri
+- Miki yavru olarak başlar.
+- Her tamamlanan Pomodoro:
+  - **+15 XP**
+  - **+10 coin**
+- XP kazandıkça Miki büyür.
+- `Miki` sayfasında:
+  - pixel oda görünümü
+  - büyüme çubuğu
+  - coin sayacı
+  - oda geliştirme mağazası
+- Coin ile şunlar geliştirilebilir:
+  - duvar kağıdı
+  - zemin
+  - pencere
+  - yatak
+  - halı
+  - bitki
+  - raf
+  - lamba
+  - oyuncak
 
-## Kalan özellikler
+## Yüklenecek dosyalar
 
-- Pomodoro odak sayacı
-- Kısa ve uzun mola
-- Tiklenebilir günlük ajanda
-- Ajanda filtreleri ve tamamlanma yüzdesi
-- Genel yapılacaklar listesi
-- Ders/kategori yönetimi
-- Haftalık odak grafiği
-- Genel başarı rozetleri
-- Sınav geri sayımı
-- Oturum günlüğü
-- Veri yedekleme ve geri yükleme
-- Tema seçimi
-- Tarayıcı içinde üretilen odak sesleri
-
-## GitHub Pages kurulumu
-
-Dosyaların tamamını repository ana dizinine yükleyin. Ana dizinde doğrudan şu dosyalar görünmelidir:
+Repository ana dizinine şu 6 dosyayı yükleyin:
 
 - `index.html`
-- `app.js`
 - `styles.css`
+- `app.js`
 - `manifest.webmanifest`
 - `sw.js`
 - `README.md`
 
-`Settings → Pages → Deploy from a branch → main → / (root)` seçilmelidir.
+## GitHub Pages kurulumu
 
-Bu pakette `assets` veya `icons` klasörü bulunmaz; dolayısıyla eksik resim yolu oluşamaz.
+1. Dosyaları repository ana sayfasına yükleyin.
+2. Commit oluşturun.
+3. `Settings → Pages` bölümüne girin.
+4. `Deploy from a branch` seçin.
+5. `main` ve `/ (root)` seçin.
+6. Kaydedin.

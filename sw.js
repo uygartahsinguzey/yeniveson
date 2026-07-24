@@ -1,9 +1,9 @@
-const CACHE_NAME="berna-v5.2-lite-cache";
-const APP_FILES=["./","./index.html","./styles.css","./app.js","./manifest.webmanifest"];
+const CACHE_NAME="berna-v7-miki-20260724";
+const APP_SHELL=["./","./index.html","./styles.css","./app.js","./manifest.webmanifest"];
 
 self.addEventListener("install",event=>{
   self.skipWaiting();
-  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_FILES)));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)));
 });
 
 self.addEventListener("activate",event=>{
@@ -16,13 +16,22 @@ self.addEventListener("activate",event=>{
 
 self.addEventListener("fetch",event=>{
   if(event.request.method!=="GET")return;
+  const requestUrl=new URL(event.request.url);
+  if(requestUrl.origin!==self.location.origin)return;
   event.respondWith(
     fetch(event.request)
       .then(response=>{
-        const copy=response.clone();
-        caches.open(CACHE_NAME).then(cache=>cache.put(event.request,copy));
+        if(response.ok){
+          const copy=response.clone();
+          caches.open(CACHE_NAME).then(cache=>cache.put(event.request,copy));
+        }
         return response;
       })
-      .catch(()=>caches.match(event.request).then(hit=>hit||caches.match("./index.html")))
+      .catch(async()=>{
+        const cached=await caches.match(event.request);
+        if(cached)return cached;
+        if(event.request.mode==="navigate")return caches.match("./index.html");
+        return new Response("Dosya bulunamadı",{status:404,headers:{"Content-Type":"text/plain; charset=utf-8"}});
+      })
   );
 });

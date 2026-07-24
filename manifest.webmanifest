@@ -1,11 +1,12 @@
 {
-  "name": "Berna – Günlük Odak ve Planlayıcı",
+  "name": "Berna · Miki Edition",
   "short_name": "Berna",
-  "description": "Görsel dosya bağımlılığı olmayan odak sayacı, tiklenebilir ajanda ve yapılacaklar uygulaması.",
+  "description": "Miki'nin büyüdüğü pixel oda temalı pomodoro ve ajanda uygulaması.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f1eb",
-  "theme_color": "#f4f1eb",
-  "lang": "tr"
+  "background_color": "#f7f3ee",
+  "theme_color": "#f7f3ee",
+  "lang": "tr",
+  "orientation": "portrait-primary"
 }
