@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body, h1, h2, p, ul, fieldset { margin: 0; }
+
+ul { padding: 0; list-style: none; }
+
+button, input, select { font: inherit; }
+
+button { border: 0; }
+
+img, svg, canvas { display: block; max-width: 100%; }
+
+dialog { padding: 0; border: 0; }
+
+fieldset { padding: 0; border: 0; }
+
+input, select { min-width: 0; }

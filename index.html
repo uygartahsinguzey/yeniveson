@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#7f9273">
+  <meta name="description" content="Berna — cozy, minimal ve premium çalışma arkadaşı.">
+  <title>Berna</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/pages.css">
+  <link rel="stylesheet" href="./css/miki.css">
+  <link rel="stylesheet" href="./css/room.css">
+  <link rel="stylesheet" href="./css/animations.css">
+  <link rel="stylesheet" href="./css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">İçeriğe geç</a>
+
+  <header class="app-header">
+    <div class="brand" aria-label="Berna">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span class="brand-name">Berna</span>
+    </div>
+
+    <nav class="top-tabs" aria-label="Ana navigasyon">
+      <button class="tab is-active" data-route="today" type="button">Bugün</button>
+      <button class="tab" data-route="focus" type="button">Odak</button>
+      <button class="tab" data-route="miki" type="button">Miki</button>
+      <button class="tab" data-route="room" type="button">Oda</button>
+      <button class="tab" data-route="progress" type="button">İlerleme</button>
+      <button class="tab" data-route="friends" type="button">Arkadaşlar</button>
+    </nav>
+
+    <button class="icon-button" id="settings-button" type="button" aria-label="Ayarlar">
+      <svg aria-hidden="true"><use href="#icon-settings"></use></svg>
+    </button>
+  </header>
+
+  <main id="main-content" class="app-main">
+    <!-- BUGÜN -->
+    <section class="page is-active" data-page="today" aria-labelledby="today-title">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow" id="today-date"></p>
+          <h1 id="today-title">Günaydın</h1>
+          <p class="page-copy">Bugün yalnızca başlayacak kadarını yap.</p>
+        </div>
+      </div>
+
+      <div class="today-grid">
+        <article class="card hero-card">
+          <div>
+            <span class="card-label">Bugünkü hedef</span>
+            <h2><span id="goal-progress-minutes">0</span> / <span id="goal-target-minutes">60</span> dk</h2>
+            <div class="progress-track" aria-label="Bugünkü hedef ilerlemesi">
+              <span id="goal-progress-bar"></span>
+            </div>
+          </div>
+          <button class="text-button" id="edit-goal-button" type="button">Hedefi düzenle</button>
+        </article>
+
+        <article class="card exam-card">
+          <div class="card-head">
+            <div>
+              <span class="card-label">Yaklaşan sınav</span>
+              <h2 id="exam-name">Sınav eklenmedi</h2>
+            </div>
+            <button class="icon-button subtle" id="edit-exam-button" type="button" aria-label="Sınavı düzenle">
+              <svg aria-hidden="true"><use href="#icon-edit"></use></svg>
+            </button>
+          </div>
+          <p id="exam-countdown" class="muted">Hazır olduğunda ekleyebilirsin.</p>
+        </article>
+
+        <article class="card tasks-card">
+          <div class="card-head">
+            <div>
+              <span class="card-label">Bugünkü görevler</span>
+              <h2>Küçük adımlar</h2>
+            </div>
+            <button class="icon-button subtle" id="add-task-button" type="button" aria-label="Görev ekle">
+              <svg aria-hidden="true"><use href="#icon-plus"></use></svg>
+            </button>
+          </div>
+          <ul id="task-list" class="task-list"></ul>
+          <p id="task-empty" class="empty-state">Bugün için görev eklenmedi.</p>
+        </article>
+
+        <article class="card quick-focus-card">
+          <div>
+            <span class="card-label">Hızlı Pomodoro</span>
+            <h2>25 dakikalık sakin bir başlangıç</h2>
+            <p class="muted">Dersini seç, Miki seninle gelsin.</p>
+          </div>
+          <button class="primary-button" id="quick-focus-button" type="button">
+            <svg aria-hidden="true"><use href="#icon-play"></use></svg>
+            Odaklan
+          </button>
+        </article>
+
+        <article class="card mini-miki-card">
+          <div>
+            <span class="card-label">Mini Miki</span>
+            <h2 id="mini-miki-mood">Normal</h2>
+            <p id="mini-miki-message" class="muted">Bugün birlikte başlayabilirsiniz.</p>
+          </div>
+          <div class="miki miki--mini mood-normal" data-miki aria-label="Miki">
+            <div class="miki-shadow"></div>
+            <div class="miki-tail"></div>
+            <div class="miki-body"></div>
+            <div class="miki-head">
+              <span class="miki-ear miki-ear--left"></span>
+              <span class="miki-ear miki-ear--right"></span>
+              <span class="miki-eye miki-eye--left"></span>
+              <span class="miki-eye miki-eye--right"></span>
+              <span class="miki-nose"></span>
+              <span class="miki-mouth"></span>
+            </div>
+            <span class="miki-z">z</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ODAK -->
+    <section class="page focus-page" data-page="focus" aria-labelledby="focus-title">
+      <h1 class="sr-only" id="focus-title">Odak</h1>
+      <div class="focus-shell">
+        <div class="focus-controls">
+          <label class="field-label" for="subject-select">Ders</label>
+          <div class="inline-field">
+            <select id="subject-select" class="select-field" aria-label="Ders seç"></select>
+            <button class="icon-button subtle" id="manage-subjects-button" type="button" aria-label="Dersleri düzenle">
+              <svg aria-hidden="true"><use href="#icon-edit"></use></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="timer-stage" id="timer-stage">
+          <svg class="timer-ring" viewBox="0 0 260 260" aria-hidden="true">
+            <circle class="timer-ring-bg" cx="130" cy="130" r="112"></circle>
+            <circle class="timer-ring-progress" id="timer-ring-progress" cx="130" cy="130" r="112"></circle>
+          </svg>
+          <div class="timer-copy">
+            <span class="card-label">Pomodoro</span>
+            <strong id="timer-display">25:00</strong>
+            <span id="timer-status" class="muted">Hazır</span>
+          </div>
+          <div class="miki-orbit" id="miki-orbit" aria-hidden="true">
+            <div class="miki miki--timer mood-normal" data-miki>
+              <div class="miki-shadow"></div>
+              <div class="miki-tail"></div>
+              <div class="miki-body"></div>
+              <div class="miki-head">
+                <span class="miki-ear miki-ear--left"></span>
+                <span class="miki-ear miki-ear--right"></span>
+                <span class="miki-eye miki-eye--left"></span>
+                <span class="miki-eye miki-eye--right"></span>
+                <span class="miki-nose"></span>
+                <span class="miki-mouth"></span>
+              </div>
+              <span class="miki-z">z</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="duration-picker" role="group" aria-label="Süre">
+          <button class="duration-button" data-minutes="15" type="button">15</button>
+          <button class="duration-button is-active" data-minutes="25" type="button">25</button>
+          <button class="duration-button" data-minutes="45" type="button">45</button>
+          <button class="duration-button" data-minutes="60" type="button">60</button>
+        </div>
+
+        <button class="primary-button focus-start" id="timer-start-button" type="button">
+          <svg aria-hidden="true"><use href="#icon-play"></use></svg>
+          Başlat
+        </button>
+
+        <div class="sound-picker" role="group" aria-label="Ortam sesi">
+          <button class="sound-button" data-sound="rain" type="button">
+            <svg aria-hidden="true"><use href="#icon-rain"></use></svg>
+            <span>Yağmur</span>
+          </button>
+          <button class="sound-button" data-sound="forest" type="button">
+            <svg aria-hidden="true"><use href="#icon-leaf"></use></svg>
+            <span>Orman</span>
+          </button>
+          <button class="sound-button" data-sound="cafe" type="button">
+            <svg aria-hidden="true"><use href="#icon-cup"></use></svg>
+            <span>Kafe</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MİKİ -->
+    <section class="page" data-page="miki" aria-labelledby="miki-title">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">Çalışma arkadaşın</p>
+          <h1 id="miki-title">Miki</h1>
+          <p class="page-copy">Baskı kurmaz. Sadece yanında kalır.</p>
+        </div>
+      </div>
+
+      <article class="card miki-profile-card">
+        <div class="miki-scene">
+          <div class="miki miki--large mood-normal" data-miki aria-label="Miki">
+            <div class="miki-shadow"></div>
+            <div class="miki-tail"></div>
+            <div class="miki-body"></div>
+            <div class="miki-head">
+              <span class="miki-ear miki-ear--left"></span>
+              <span class="miki-ear miki-ear--right"></span>
+              <span class="miki-eye miki-eye--left"></span>
+              <span class="miki-eye miki-eye--right"></span>
+              <span class="miki-nose"></span>
+              <span class="miki-mouth"></span>
+            </div>
+            <span class="miki-z">z</span>
+          </div>
+        </div>
+        <div class="miki-profile-copy">
+          <span class="mood-pill" id="miki-mood-pill">Normal</span>
+          <h2 id="miki-message">Birlikte başlamak için burada.</h2>
+          <p class="muted" id="miki-detail">İlk Pomodoro tamamlandığında Miki mutlu olacak.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ODA -->
+    <section class="page" data-page="room" aria-labelledby="room-title">
+      <div class="page-heading split-heading">
+        <div>
+          <p class="eyebrow">Sakin köşe</p>
+          <h1 id="room-title">Oda</h1>
+          <p class="page-copy">Miki'nin çalışma molalarında dinlendiği yer.</p>
+        </div>
+        <button class="secondary-button" id="open-store-button" type="button">
+          <svg aria-hidden="true"><use href="#icon-bag"></use></svg>
+          Mağaza
+        </button>
+      </div>
+
+      <div class="room-scene" id="room-scene" aria-label="Miki'nin odası">
+        <div class="room-wall"></div>
+        <div class="room-floor"></div>
+        <div class="room-window room-item" data-room-item="window">
+          <span class="window-sky"></span><span class="window-cross"></span>
+        </div>
+        <div class="room-bookshelf room-item" data-room-item="bookshelf">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="room-bed room-item" data-room-item="bed"><span></span></div>
+        <div class="room-rug room-item" data-room-item="rug"></div>
+        <div class="room-plant room-item" data-room-item="plant">
+          <i></i><i></i><i></i><b></b>
+        </div>
+        <div class="room-desk room-item optional-item" data-room-item="desk"><span></span></div>
+        <div class="room-lamp room-item optional-item" data-room-item="lamp"><span></span></div>
+        <div class="room-art room-item optional-item" data-room-item="art"><span></span></div>
+        <div class="room-cushion room-item optional-item" data-room-item="cushion"></div>
+
+        <div class="room-miki">
+          <div class="miki miki--room mood-normal" data-miki aria-hidden="true">
+            <div class="miki-shadow"></div>
+            <div class="miki-tail"></div>
+            <div class="miki-body"></div>
+            <div class="miki-head">
+              <span class="miki-ear miki-ear--left"></span>
+              <span class="miki-ear miki-ear--right"></span>
+              <span class="miki-eye miki-eye--left"></span>
+              <span class="miki-eye miki-eye--right"></span>
+              <span class="miki-nose"></span>
+              <span class="miki-mouth"></span>
+            </div>
+            <span class="miki-z">z</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- İLERLEME -->
+    <section class="page" data-page="progress" aria-labelledby="progress-title">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">Sade ilerleme</p>
+          <h1 id="progress-title">İlerleme</h1>
+          <p class="page-copy">Yalnızca gerçekten önemli olan sayılar.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <article class="stat-card"><span>Bugün</span><strong id="stat-daily">0 dk</strong></article>
+        <article class="stat-card"><span>Bu hafta</span><strong id="stat-weekly">0 dk</strong></article>
+        <article class="stat-card"><span>Bu ay</span><strong id="stat-monthly">0 dk</strong></article>
+        <article class="stat-card"><span>Toplam</span><strong id="stat-total">0 dk</strong></article>
+        <article class="stat-card"><span>XP</span><strong id="stat-xp">0</strong></article>
+        <article class="stat-card"><span>Coin</span><strong id="stat-coins">0</strong></article>
+        <article class="stat-card"><span>Pomodoro</span><strong id="stat-pomodoros">0</strong></article>
+        <article class="stat-card"><span>Seri</span><strong id="stat-streak">0 gün</strong></article>
+      </div>
+
+      <div class="chart-grid">
+        <article class="card chart-card">
+          <div class="card-head">
+            <div><span class="card-label">Son 7 gün</span><h2>Haftalık çalışma</h2></div>
+          </div>
+          <canvas id="weekly-chart" width="700" height="300" aria-label="Haftalık çalışma grafiği"></canvas>
+        </article>
+        <article class="card chart-card">
+          <div class="card-head">
+            <div><span class="card-label">Ders bazlı</span><h2>Dağılım</h2></div>
+          </div>
+          <div id="subject-breakdown" class="subject-breakdown"></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ARKADAŞLAR -->
+    <section class="page" data-page="friends" aria-labelledby="friends-title">
+      <div class="page-heading split-heading">
+        <div>
+          <p class="eyebrow">Birlikte odaklan</p>
+          <h1 id="friends-title">Arkadaşlar</h1>
+          <p class="page-copy">Yakınlarının çalışma ritmini sade biçimde gör.</p>
+        </div>
+        <button class="secondary-button" id="add-friend-button" type="button">
+          <svg aria-hidden="true"><use href="#icon-user-plus"></use></svg>
+          Arkadaş ekle
+        </button>
+      </div>
+
+      <article class="card own-profile-card">
+        <div>
+          <span class="card-label">Profilin</span>
+          <h2 id="own-profile-name">Berna kullanıcısı</h2>
+          <p class="muted">Profil kodu: <strong id="own-profile-code"></strong></p>
+        </div>
+        <span class="live-badge" id="own-live-status">Dinleniyor</span>
+      </article>
+
+      <div id="friends-list" class="friends-grid"></div>
+      <p id="friends-empty" class="empty-state card">Henüz arkadaş eklenmedi.</p>
+    </section>
+  </main>
+
+  <!-- AYARLAR -->
+  <dialog class="modal" id="settings-modal">
+    <form method="dialog" class="modal-card" id="settings-form">
+      <div class="modal-head">
+        <div><span class="card-label">Berna</span><h2>Ayarlar</h2></div>
+        <button class="icon-button subtle" data-close-dialog="settings-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <label class="field">
+        <span>Adın</span>
+        <input id="profile-name-input" maxlength="40" autocomplete="name" placeholder="Adın">
+      </label>
+      <fieldset class="field">
+        <legend>Tema</legend>
+        <div class="segmented">
+          <label><input type="radio" name="theme" value="light"><span>Açık</span></label>
+          <label><input type="radio" name="theme" value="dark"><span>Koyu</span></label>
+        </div>
+      </fieldset>
+      <button class="primary-button" value="default" type="submit">Kaydet</button>
+    </form>
+  </dialog>
+
+  <!-- DERSLER -->
+  <dialog class="modal" id="subjects-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div><span class="card-label">Odak</span><h2>Dersler</h2></div>
+        <button class="icon-button subtle" data-close-dialog="subjects-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <form id="subject-form" class="inline-form">
+        <input id="subject-name-input" maxlength="50" placeholder="Ders adı" required>
+        <button class="primary-button compact" type="submit">Ekle</button>
+      </form>
+      <ul id="subjects-list" class="manage-list"></ul>
+      <p id="subjects-empty" class="empty-state">Henüz ders oluşturulmadı.</p>
+    </div>
+  </dialog>
+
+  <!-- HEDEF -->
+  <dialog class="modal" id="goal-modal">
+    <form method="dialog" class="modal-card" id="goal-form">
+      <div class="modal-head">
+        <div><span class="card-label">Bugün</span><h2>Günlük hedef</h2></div>
+        <button class="icon-button subtle" data-close-dialog="goal-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <label class="field">
+        <span>Dakika</span>
+        <input id="goal-input" type="number" min="10" max="720" step="5" required>
+      </label>
+      <button class="primary-button" value="default" type="submit">Kaydet</button>
+    </form>
+  </dialog>
+
+  <!-- SINAV -->
+  <dialog class="modal" id="exam-modal">
+    <form method="dialog" class="modal-card" id="exam-form">
+      <div class="modal-head">
+        <div><span class="card-label">Bugün</span><h2>Yaklaşan sınav</h2></div>
+        <button class="icon-button subtle" data-close-dialog="exam-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <label class="field"><span>Sınav adı</span><input id="exam-name-input" maxlength="60" required></label>
+      <label class="field"><span>Tarih</span><input id="exam-date-input" type="date" required></label>
+      <button class="primary-button" value="default" type="submit">Kaydet</button>
+    </form>
+  </dialog>
+
+  <!-- GÖREV -->
+  <dialog class="modal" id="task-modal">
+    <form method="dialog" class="modal-card" id="task-form">
+      <div class="modal-head">
+        <div><span class="card-label">Bugün</span><h2>Görev ekle</h2></div>
+        <button class="icon-button subtle" data-close-dialog="task-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <label class="field"><span>Görev</span><input id="task-input" maxlength="90" required></label>
+      <button class="primary-button" value="default" type="submit">Ekle</button>
+    </form>
+  </dialog>
+
+  <!-- MAĞAZA -->
+  <dialog class="modal modal--wide" id="store-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="card-label">Oda</span>
+          <h2>Mağaza</h2>
+          <p class="muted"><span id="store-coins">0</span> coin</p>
+        </div>
+        <button class="icon-button subtle" data-close-dialog="store-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="store-categories" id="store-categories"></div>
+      <div class="store-grid" id="store-grid"></div>
+    </div>
+  </dialog>
+
+  <!-- ARKADAŞ -->
+  <dialog class="modal" id="friend-modal">
+    <form method="dialog" class="modal-card" id="friend-form">
+      <div class="modal-head">
+        <div><span class="card-label">Arkadaşlar</span><h2>Arkadaş ekle</h2></div>
+        <button class="icon-button subtle" data-close-dialog="friend-modal" aria-label="Kapat" type="button">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <label class="field"><span>Adı</span><input id="friend-name-input" maxlength="40" required></label>
+      <label class="field"><span>Profil kodu</span><input id="friend-code-input" maxlength="12" required></label>
+      <button class="primary-button" value="default" type="submit">Ekle</button>
+    </form>
+  </dialog>
+
+  <!-- GÜN SONU -->
+  <dialog class="modal" id="summary-modal">
+    <div class="modal-card summary-card">
+      <div class="summary-mark" aria-hidden="true">✦</div>
+      <span class="card-label">Bugün</span>
+      <h2>Gün sonu özeti</h2>
+      <div class="summary-grid">
+        <div><span>Toplam çalışma</span><strong id="summary-total">0 dk</strong></div>
+        <div><span>Pomodoro</span><strong id="summary-count">0</strong></div>
+        <div><span>En çok çalışılan ders</span><strong id="summary-subject">—</strong></div>
+      </div>
+      <button class="primary-button" data-close-dialog="summary-modal" type="button">Tamam</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="celebration" class="celebration" aria-hidden="true"></div>
+
+  <audio id="audio-rain" src="./sounds/rain.wav" preload="none" loop></audio>
+  <audio id="audio-forest" src="./sounds/forest.wav" preload="none" loop></audio>
+  <audio id="audio-cafe" src="./sounds/cafe.wav" preload="none" loop></audio>
+
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="icon-settings" viewBox="0 0 24 24"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21h-4v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3.1 14H3v-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3.1V3h4v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24"><path d="m4 16-.8 4 4-.8L18.5 7.9l-3.2-3.2L4 16Z"/><path d="m13.8 6.2 3.2 3.2"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></symbol>
+    <symbol id="icon-rain" viewBox="0 0 24 24"><path d="M7 15h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 2A3 3 0 0 0 7 15Z"/><path d="m8 18-1 2m5-2-1 2m5-2-1 2"/></symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 2 1 4 3 4 7 0 12-6 13-16Z"/><path d="M6 18c3-4 6-7 11-10"/></symbol>
+    <symbol id="icon-cup" viewBox="0 0 24 24"><path d="M5 8h12v7a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5V8Z"/><path d="M17 10h2a2 2 0 0 1 0 4h-2M8 4v2m4-2v2m4-2v2"/></symbol>
+    <symbol id="icon-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></symbol>
+    <symbol id="icon-user-plus" viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM3 21a6 6 0 0 1 12 0M18 8v6m-3-3h6"/></symbol>
+  </svg>
+
+  <script defer src="./js/constants.js"></script>
+  <script defer src="./js/utils.js"></script>
+  <script defer src="./js/storage.js"></script>
+  <script defer src="./js/ui.js"></script>
+  <script defer src="./js/router.js"></script>
+  <script defer src="./js/subjects.js"></script>
+  <script defer src="./js/miki.js"></script>
+  <script defer src="./js/sound.js"></script>
+  <script defer src="./js/today.js"></script>
+  <script defer src="./js/pomodoro.js"></script>
+  <script defer src="./js/progress.js"></script>
+  <script defer src="./js/room.js"></script>
+  <script defer src="./js/friends.js"></script>
+  <script defer src="./js/settings.js"></script>
+  <script defer src="./js/summary.js"></script>
+  <script defer src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+.hero-card,
+.quick-focus-card,
+.mini-miki-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+}
+
+.hero-card {
+  background:
+    linear-gradient(135deg, rgba(227, 233, 223, .88), rgba(255, 253, 248, .92));
+}
+
+.exam-card { min-height: 180px; }
+
+.tasks-card { min-height: 260px; }
+
+.task-list {
+  display: grid;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 7px 9px;
+  border-radius: var(--radius-sm);
+  transition: background var(--speed) var(--ease);
+}
+
+.task-item:hover { background: var(--surface-muted); }
+
+.task-check {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-solid);
+  color: transparent;
+}
+
+.task-item.is-done .task-check {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+}
+
+.task-item.is-done .task-name {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.quick-focus-card {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(148, 165, 136, .22), transparent 50%),
+    var(--surface);
+}
+
+.mini-miki-card { overflow: hidden; min-height: 200px; }
+
+.focus-shell {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.focus-controls {
+  width: min(100%, 360px);
+  margin: 0 auto 18px;
+  text-align: left;
+}
+
+.timer-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(82vw, 380px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.timer-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-ring circle {
+  fill: none;
+  stroke-width: 7;
+}
+
+.timer-ring-bg { stroke: var(--surface-muted); }
+
+.timer-ring-progress {
+  stroke: var(--accent);
+  stroke-dasharray: 703.72;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 500ms linear;
+}
+
+.timer-copy {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 5px;
+}
+
+.timer-copy strong {
+  font-size: clamp(3.6rem, 15vw, 6.3rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.miki-orbit {
+  position: absolute;
+  inset: 8%;
+  pointer-events: none;
+}
+
+.miki-orbit.is-running { animation: orbit 12s linear infinite; }
+.miki-orbit.is-bouncing { animation: miki-bounce-path 1.25s var(--ease); }
+
+.duration-picker {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+}
+
+.duration-button {
+  width: 54px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.duration-button.is-active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.focus-start {
+  width: min(100%, 260px);
+  margin: 22px auto 16px;
+}
+
+.sound-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: min(100%, 360px);
+  margin: 0 auto;
+}
+
+.sound-button {
+  display: grid;
+  place-items: center;
+  gap: 7px;
+  min-height: 78px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 750;
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+
+.sound-button:hover { transform: translateY(-2px); }
+
+.sound-button.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.miki-profile-card {
+  display: grid;
+  grid-template-columns: minmax(260px, .8fr) minmax(280px, 1.2fr);
+  align-items: center;
+  min-height: 430px;
+  overflow: hidden;
+}
+
+.miki-scene {
+  display: grid;
+  place-items: center;
+  min-height: 340px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 50% 82%, rgba(164, 124, 91, .16), transparent 28%),
+    linear-gradient(180deg, var(--accent-soft), var(--surface-muted));
+}
+
+.miki-profile-copy {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: clamp(8px, 4vw, 50px);
+}
+
+.miki-profile-copy h2 {
+  max-width: 470px;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.stat-card {
+  min-height: 118px;
+  padding: 20px;
+  border-radius: var(--radius-md);
+}
+
+.stat-card span {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: .83rem;
+  font-weight: 750;
+}
+
+.stat-card strong { font-size: clamp(1.35rem, 3vw, 2rem); }
+
+.chart-card canvas {
+  width: 100%;
+  height: auto;
+  margin-top: 14px;
+}
+
+.subject-breakdown {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.breakdown-row {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) 2fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.breakdown-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breakdown-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--surface-muted);
+}
+
+.breakdown-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
+.own-profile-card,
+.friend-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.friend-card {
+  min-height: 210px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.friend-card-top,
+.friend-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.friend-avatar {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 17px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 900;
+}
+
+.friend-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.friend-stats {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.friend-stats div {
+  display: grid;
+  gap: 4px;
+}
+
+.friend-stats span {
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+.friend-achievements {
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.store-categories {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+}
+
+.store-category {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-muted);
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.store-category.is-active {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.store-item {
+  display: grid;
+  gap: 14px;
+  min-height: 180px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.store-preview {
+  display: grid;
+  place-items: center;
+  min-height: 76px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  font-size: 2rem;
+}
+
+.store-item button { width: 100%; }
+
+.summary-card { text-align: center; }
+
+.summary-mark {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin: 0 auto;
+  border-radius: 22px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 1.8rem;
+}
+
+.summary-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.summary-grid div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 720px) {
+  .hero-card,
+  .quick-focus-card,
+  .mini-miki-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mini-miki-card { align-items: center; }
+
+  .miki-profile-card { grid-template-columns: 1fr; }
+  .miki-profile-copy { padding: 16px 4px 4px; }
+  .store-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .duration-button { width: 48px; }
+  .stat-grid { gap: 9px; }
+  .stat-card { min-height: 104px; padding: 16px; }
+}

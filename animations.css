@@ -1,0 +1,92 @@
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 44%, 48%, 100% { transform: scaleY(1); }
+  46% { transform: scaleY(.06); }
+}
+
+@keyframes tail {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(14deg); }
+}
+
+@keyframes z-float {
+  from { opacity: 0; transform: translate(0, 8px) scale(.8); }
+  50% { opacity: 1; }
+  to { opacity: 0; transform: translate(11px, -16px) scale(1.1); }
+}
+
+@keyframes yawn {
+  0%, 100% { transform: scale(.35); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes walk-bob {
+  from { transform: translateY(0) rotate(-1deg); }
+  to { transform: translateY(-5%) rotate(1deg); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes miki-bounce-path {
+  0% { transform: translateX(0) translateY(0) rotate(0); }
+  42% { transform: translateX(68%) translateY(-18%) rotate(12deg); }
+  55% { transform: translateX(76%) translateY(0) rotate(-10deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0); }
+}
+
+@keyframes celebration-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.4); }
+  35% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+}
+
+.celebration {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 80;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.celebration.is-active {
+  opacity: 1;
+  animation: celebration-pop 1.4s var(--ease) both;
+}
+
+.celebration::before,
+.celebration::after {
+  content: "✦  ·  ✦  ·  ✦";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--accent-strong);
+  font-size: 1.8rem;
+  letter-spacing: .35em;
+}
+
+.celebration::after {
+  transform: rotate(90deg) scale(.72);
+  color: var(--wood-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

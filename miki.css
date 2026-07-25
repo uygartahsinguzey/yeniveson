@@ -1,0 +1,161 @@
+.miki {
+  --miki-size: 120px;
+  position: relative;
+  width: var(--miki-size);
+  height: calc(var(--miki-size) * .9);
+}
+
+.miki--mini { --miki-size: 108px; }
+.miki--large { --miki-size: 190px; }
+.miki--timer { --miki-size: 58px; position: absolute; top: -2%; left: 47%; }
+.miki--room { --miki-size: 88px; }
+
+.miki-shadow {
+  position: absolute;
+  left: 19%;
+  right: 9%;
+  bottom: 1%;
+  height: 12%;
+  border-radius: 50%;
+  background: rgba(39, 48, 37, .13);
+  filter: blur(5px);
+}
+
+.miki-body {
+  position: absolute;
+  left: 26%;
+  bottom: 10%;
+  width: 58%;
+  height: 55%;
+  border-radius: 48% 52% 43% 48%;
+  background: #c99b72;
+  box-shadow: inset -10px -10px 0 rgba(116, 84, 61, .08);
+}
+
+.miki-head {
+  position: absolute;
+  left: 7%;
+  top: 4%;
+  width: 62%;
+  height: 62%;
+  border-radius: 46% 48% 44% 50%;
+  background: #d8ad84;
+  box-shadow: inset -8px -7px 0 rgba(116, 84, 61, .07);
+  transform-origin: 70% 80%;
+}
+
+.miki-ear {
+  position: absolute;
+  top: -11%;
+  width: 29%;
+  height: 34%;
+  border-radius: 70% 30% 60% 40%;
+  background: #ba8764;
+  z-index: -1;
+}
+
+.miki-ear::after {
+  content: "";
+  position: absolute;
+  inset: 24%;
+  border-radius: inherit;
+  background: #e4b6a6;
+}
+
+.miki-ear--left { left: 3%; transform: rotate(-24deg); }
+.miki-ear--right { right: 5%; transform: rotate(24deg) scaleX(-1); }
+
+.miki-eye {
+  position: absolute;
+  top: 45%;
+  width: 8%;
+  height: 10%;
+  border-radius: 50%;
+  background: #3c352f;
+  transform-origin: center;
+  animation: blink 5.2s infinite;
+}
+
+.miki-eye--left { left: 30%; }
+.miki-eye--right { right: 25%; }
+
+.miki-nose {
+  position: absolute;
+  left: 48%;
+  top: 59%;
+  width: 9%;
+  height: 7%;
+  border-radius: 55% 55% 70% 70%;
+  background: #56473d;
+}
+
+.miki-mouth {
+  position: absolute;
+  left: 51%;
+  top: 66%;
+  width: 13%;
+  height: 8%;
+  border-bottom: 2px solid #715f52;
+  border-radius: 50%;
+}
+
+.miki-tail {
+  position: absolute;
+  right: 1%;
+  bottom: 20%;
+  width: 45%;
+  height: 18%;
+  border: calc(var(--miki-size) * .07) solid #ba8764;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform-origin: left center;
+  animation: tail 2.8s var(--ease) infinite;
+}
+
+.miki-z {
+  position: absolute;
+  right: 4%;
+  top: 0;
+  display: none;
+  color: var(--accent-strong);
+  font-size: calc(var(--miki-size) * .14);
+  font-weight: 900;
+  animation: z-float 1.8s var(--ease) infinite;
+}
+
+.mood-happy .miki-mouth {
+  height: 12%;
+  border-bottom-width: 3px;
+  transform: rotate(7deg);
+}
+
+.mood-sad .miki-head { transform: rotate(-5deg); }
+.mood-sad .miki-tail { animation-duration: 5s; }
+.mood-sad .miki-mouth {
+  top: 70%;
+  border-bottom: 0;
+  border-top: 2px solid #715f52;
+}
+
+.mood-sleeping .miki-head { transform: rotate(12deg) translateY(8%); }
+.mood-sleeping .miki-eye {
+  height: 2px;
+  border-radius: 0;
+  animation: none;
+}
+.mood-sleeping .miki-z { display: block; }
+.mood-sleeping .miki-tail { animation: none; transform: rotate(7deg); }
+
+.miki.is-yawning .miki-mouth {
+  width: 14%;
+  height: 14%;
+  border: 0;
+  border-radius: 50%;
+  background: #715f52;
+  animation: yawn .8s var(--ease);
+}
+
+.miki.is-walking .miki-body {
+  animation: walk-bob .55s ease-in-out infinite alternate;
+}
